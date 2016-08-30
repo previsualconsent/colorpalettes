@@ -23,6 +23,9 @@ namespace Color
          Color() : m_color()
          {
          }
+         Color(int color) :  m_color(*(gROOT->GetColor(color)))
+         {
+         }
          Color(EColor color) :  m_color(*(gROOT->GetColor(color)))
          {
          }
@@ -172,6 +175,21 @@ namespace Color
       return  MakePalette(colors, reverse);
    }
 
+   Palette YlOrRd(bool reverse = false)
+   {
+      std::vector<Color::Color> colors;
+      colors.push_back("#ffffcc");
+      colors.push_back("#ffeda0");
+      colors.push_back("#fed976");
+      colors.push_back("#feb24c");
+      colors.push_back("#fd8d3c");
+      colors.push_back("#fc4e2a");
+      colors.push_back("#e31a1c");
+      colors.push_back("#bd0026");
+      colors.push_back("#800026");
+      return MakePalette(colors, reverse);
+   }
+
    Palette GetPalette(std::string pal, bool reverse = false)
    {
       if(PaletteFileDB.size() == 0)
@@ -185,6 +203,7 @@ namespace Color
       {
          PaletteFunctionDB["YlGnBu"] = YlGnBu;
          PaletteFunctionDB["PrGn"] = PrGn;
+         PaletteFunctionDB["YlOrRd"] = YlOrRd;
       }
 
       PaletteFileMap::iterator palette = PaletteFileDB.find(pal);
