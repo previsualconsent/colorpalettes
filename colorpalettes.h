@@ -64,7 +64,7 @@ namespace Color
 
             //Read file
             std::cout << "Opening " << filename << std::endl;
-            std::ifstream ifs(filename.c_str(), std::ifstream::in);
+            std::ifstream ifs{filename.c_str(), std::ifstream::in};
 
             float r,g,b;
             while(ifs.good() && m_ncolors < MAX_COLORS )
@@ -222,7 +222,7 @@ namespace Color
 
       PaletteFileMap::iterator palette = PaletteFileDB.find(pal);
       if( palette != PaletteFileDB.end())
-         return Palette(palette->second, reverse);
+         return Palette{palette->second, reverse};
       else {
          PaletteFunctionMap::iterator palfunc = PaletteFunctionDB.find(pal);
          if( palfunc != PaletteFunctionDB.end())
@@ -236,13 +236,13 @@ namespace Color
    {
       GetPalette("");
       TRandom3 rand;
-      TH2F h("Hi","hi",100,0,10,100,0,10);
+      TH2F h{"Hi","hi",100,0,10,100,0,10};
       for(unsigned int i = 0; i < 1000000; ++i)
       {
          h.Fill(rand.Gaus(5,3), rand.Gaus(5,3));
       }
       
-      TCanvas * c = new TCanvas("c","c",600, 600);
+      TCanvas * c = new TCanvas{"c","c",600, 600};
       gStyle->SetOptStat(0);
       for(PaletteFileMap::iterator i = PaletteFileDB.begin();
             i != PaletteFileDB.end();
