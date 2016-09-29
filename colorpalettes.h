@@ -35,7 +35,7 @@ namespace Color
          Color(float r, float g, float b) :  m_color(*(gROOT->GetColor(TColor::GetColor(r,g,b))))
          {
          }
-         Color(char * hex) :  m_color(*(gROOT->GetColor(TColor::GetColor(hex))))
+         Color(char const * hex) :  m_color(*(gROOT->GetColor(TColor::GetColor(hex))))
          {
          }
          void GetRGB(double & r, double & g, double & b)
@@ -146,47 +146,60 @@ namespace Color
 
    Palette YlGnBu(bool reverse = false)
    {
-      std::vector<Color::Color> colors;
-      colors.push_back("#ffffd9");
-      colors.push_back("#edf8b1");
-      colors.push_back("#c7e9b4");
-      colors.push_back("#7fcdbb");
-      colors.push_back("#41b6c4");
-      colors.push_back("#1d91c0");
-      colors.push_back("#225ea8");
-      colors.push_back("#253494");
-      colors.push_back("#081d58");
+      std::vector<Color::Color> colors = {
+         "#ffffd9",
+         "#edf8b1",
+         "#c7e9b4",
+         "#7fcdbb",
+         "#41b6c4",
+         "#1d91c0",
+         "#225ea8",
+         "#253494",
+         "#081d58",
+      };
       return  MakePalette(colors, reverse);
    }
    Palette PrGn(bool reverse = false)
    {
-      std::vector<Color::Color> colors;
-      colors.push_back("#40004b");
-      colors.push_back("#762a83");
-      colors.push_back("#9970ab");
-      colors.push_back("#c2a5cf");
-      colors.push_back("#e7d4e8");
-      colors.push_back("#f7f7f7");
-      colors.push_back("#d9f0d3");
-      colors.push_back("#a6dba0");
-      colors.push_back("#5aae61");
-      colors.push_back("#1b7837");
-      colors.push_back("#00441b");
+      std::vector<Color::Color> colors = {
+         "#40004b",
+         "#762a83",
+         "#9970ab",
+         "#c2a5cf",
+         "#e7d4e8",
+         "#f7f7f7",
+         "#d9f0d3",
+         "#a6dba0",
+         "#5aae61",
+         "#1b7837",
+         "#00441b",
+      };
       return  MakePalette(colors, reverse);
    }
 
    Palette YlOrRd(bool reverse = false)
    {
-      std::vector<Color::Color> colors;
-      colors.push_back("#ffffcc");
-      colors.push_back("#ffeda0");
-      colors.push_back("#fed976");
-      colors.push_back("#feb24c");
-      colors.push_back("#fd8d3c");
-      colors.push_back("#fc4e2a");
-      colors.push_back("#e31a1c");
-      colors.push_back("#bd0026");
-      colors.push_back("#800026");
+      std::vector<Color::Color> colors = {
+         "#ffffcc",
+         "#ffeda0",
+         "#fed976",
+         "#feb24c",
+         "#fd8d3c",
+         "#fc4e2a",
+         "#e31a1c",
+         "#bd0026",
+         "#800026",
+      };
+      return MakePalette(colors, reverse);
+   }
+
+   Palette Ugly(bool reverse = false)
+   {
+      std::vector<Color::Color> colors = {
+         {"#0099ff"},
+         {1.0f,1.0f,1.0f},
+         {255, 127, 0},
+      };
       return MakePalette(colors, reverse);
    }
 
@@ -204,6 +217,7 @@ namespace Color
          PaletteFunctionDB["YlGnBu"] = YlGnBu;
          PaletteFunctionDB["PrGn"] = PrGn;
          PaletteFunctionDB["YlOrRd"] = YlOrRd;
+         PaletteFunctionDB["Ugly"] = Ugly;
       }
 
       PaletteFileMap::iterator palette = PaletteFileDB.find(pal);
@@ -228,7 +242,7 @@ namespace Color
          h.Fill(rand.Gaus(5,3), rand.Gaus(5,3));
       }
       
-      TCanvas * c = new TCanvas("c","c",300, 300);
+      TCanvas * c = new TCanvas("c","c",600, 600);
       gStyle->SetOptStat(0);
       for(PaletteFileMap::iterator i = PaletteFileDB.begin();
             i != PaletteFileDB.end();
@@ -277,4 +291,3 @@ namespace Color
       }
    }
 }
-
